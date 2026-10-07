@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You ❤️</title>
+
+<style>
+/* =========================================================
+   COLORS — CHANGE THESE IF YOU WANT
+========================================================= */
+
+:root {
+    --bg: #0d0609;
+    --bg-soft: #1d0b12;
+    --card: rgba(31, 11, 18, 0.78);
+
+    --pink: #e85d75;
+    --pink-light: #ff8da0;
+    --red: #a92f4b;
+
+    --text: #fff5f7;
+    --muted: #d1b7be;
+    --faint: #94747d;
+
+    --border: rgba(255, 141, 160, 0.12);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(128, 24, 52, 0.22),
+            transparent 45%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(180, 35, 70, 0.08),
+            transparent 35%
+        ),
+        var(--bg);
+
+    color: var(--text);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 24px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container {
+    width: 100%;
+    max-width: 680px;
+    position: relative;
+    z-index: 2;
+}
+
+.screen {
+    width: 100%;
+    text-align: center;
+
+    animation: screenIn 0.9s ease forwards;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+h1 {
+    font-size: clamp(2.5rem, 9vw, 4.3rem);
+    font-weight: normal;
+    margin-bottom: 24px;
+
+    text-shadow:
+        0 0 30px rgba(232, 93, 117, 0.2);
+}
+
+h2 {
+    font-size: clamp(2rem, 8vw, 3.3rem);
+    font-weight: normal;
+    margin-bottom: 28px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 18px;
+}
+
+p {
+    color: var(--muted);
+    font-size: clamp(1.05rem, 4vw, 1.2rem);
+    line-height: 1.8;
+}
+
+.highlight {
+    color: var(--text);
+}
+
+.pink {
+    color: var(--pink-light);
+}
+
+.faint {
+    color: var(--faint);
+}
+
+
+/* =========================================================
+   OPENING
+========================================================= */
+
+.opening-line {
+    opacity: 0;
+    transform: translateY(12px);
+
+    animation: reveal 1s ease forwards;
+}
+
+.opening-line:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.opening-line:nth-child(3) {
+    animation-delay: 2s;
+}
+
+.opening-button {
+    opacity: 0;
+    animation:
+        reveal 1s ease 3s forwards;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button {
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+
+    border-radius: 999px;
+
+    padding: 14px 28px;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+.primary {
+    margin-top: 34px;
+
+    color: white;
+    background: var(--pink);
+
+    box-shadow:
+        0 0 30px rgba(232, 93, 117, 0.25);
+}
+
+.primary:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 40px rgba(232, 93, 117, 0.4);
+}
+
+.secondary {
+    margin-top: 24px;
+
+    color: var(--muted);
+    background: transparent;
+
+    border: 1px solid var(--border);
+}
+
+.secondary:hover {
+    color: white;
+    border-color: rgba(255, 141, 160, 0.3);
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 26px;
+
+    padding:
+        clamp(28px, 7vw, 50px)
+        clamp(22px, 6vw, 45px);
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.3);
+
+    backdrop-filter: blur(10px);
+}
+
+
+/* =========================================================
+   APOLOGY
+========================================================= */
+
+.apology-text {
+    margin-bottom: 34px;
+}
+
+.apology-text p {
+    margin-bottom: 20px;
+}
+
+.important {
+    color: var(--text);
+    font-size: clamp(1.15rem, 4vw, 1.35rem);
+}
+
+.pause {
+    margin: 36px 0 18px;
+
+    color: var(--faint);
+    font-size: 0.95rem;
+}
+
+.question {
+    color: var(--text);
+    font-size: clamp(1.3rem, 5vw, 1.7rem);
+}
+
+
+/* =========================================================
+   YES / NO
+========================================================= */
+
+.choice-buttons {
+    min-height: 80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 16px;
+
+    margin-top: 25px;
+}
+
+.yes {
+    background: var(--pink);
+    color: white;
+
+    position: relative;
+    z-index: 3;
+
+    box-shadow:
+        0 0 28px rgba(232, 93, 117, 0.28);
+}
+
+.yes:hover {
+    transform: scale(1.04);
+}
+
+.no {
+    background: #30151f;
+    color: #d7bbc2;
+
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.no.moving {
+    position: fixed;
+    z-index: 20;
+
+    transition:
+        left 0.35s ease,
+        top 0.35s ease;
+}
+
+
+/* =========================================================
+   MEMORY SECTION
+========================================================= */
+
+.memory {
+    margin-top: 35px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid var(--border);
+}
+
+.memory-item {
+    margin-top: 18px;
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.025);
+
+    opacity: 0;
+
+    transform: translateY(10px);
+}
+
+.memory-item.show {
+    animation: reveal 0.7s ease forwards;
+}
+
+.memory-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.memory-item:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.memory-item p {
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+   LITTLE THINGS
+========================================================= */
+
+.little-things {
+    margin-top: 35px;
+}
+
+.little-heart {
+    width: 75px;
+    height: 75px;
+
+    margin: 25px auto 18px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+
+    color: var(--pink-light);
+
+    background: rgba(232, 93, 117, 0.08);
+
+    border: 1px solid rgba(232, 93, 117, 0.15);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.little-heart:hover {
+    transform: scale(1.08);
+
+    box-shadow:
+        0 0 30px rgba(232, 93, 117, 0.2);
+}
+
+.little-message {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+
+    transition:
+        max-height 0.8s ease,
+        opacity 0.8s ease;
+}
+
+.little-message.show {
+    max-height: 250px;
+    opacity: 1;
+}
+
+
+/* =========================================================
+   "ONE MORE THING"
+========================================================= */
+
+.final-note {
+    margin-top: 35px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid var(--border);
+}
+
+.hidden-note {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+
+    transition:
+        max-height 0.9s ease,
+        opacity 0.9s ease;
+}
+
+.hidden-note.show {
+    max-height: 300px;
+    opacity: 1;
+
+    margin-top: 24px;
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.success h2 {
+    margin-bottom: 25px;
+}
+
+.success p {
+    margin-bottom: 20px;
+}
+
+.love-note {
+    margin: 30px 0;
+    padding: 24px;
+
+    border-left: 2px solid var(--pink);
+
+    text-align: left;
+
+    background: rgba(255,255,255,0.025);
+
+    border-radius: 0 16px 16px 0;
+}
+
+.love-note p {
+    font-size: 1.05rem;
+}
+
+
+/* =========================================================
+   HEART PARTICLES
+========================================================= */
+
+.heart-particle {
+    position: fixed;
+
+    bottom: -20px;
+
+    pointer-events: none;
+
+    color: var(--pink);
+
+    opacity: 0;
+
+    animation:
+        floatHeart 7s linear forwards;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes reveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes screenIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatHeart {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(0)
+            scale(0.7);
+    }
+
+    15% {
+        opacity: 0.25;
+    }
+
+    80% {
+        opacity: 0.08;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translateY(-100vh)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 16px;
+    }
+
+    .card {
+        border-radius: 22px;
+    }
+
+    .choice-buttons {
+        gap: 10px;
+    }
+
+    button {
+        padding: 13px 21px;
+    }
+
+    .love-note {
+        text-align: center;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<!-- =====================================================
+     1. OPENING
+====================================================== -->
+
+<section id="opening" class="screen">
+
+    <h1 class="opening-line">
+        Hey, my love...
+    </h1>
+
+    <p class="opening-line">
+        I know I messed up.
+    </p>
+
+    <p class="opening-line">
+        And there's something I want to say to you.
+    </p>
+
+    <button
+        class="primary opening-button"
+        id="explainButton">
+        Let me explain ❤️
+    </button>
+
+</section>
+
+
+
+<!-- =====================================================
+     2. APOLOGY
+====================================================== -->
+
+<section id="apology" class="screen hidden">
+
+<div class="card">
+
+    <h2>
+        I'm Sorry.
+    </h2>
+
+
+    <!-- ================================================
+         EDIT YOUR MAIN APOLOGY HERE
+    ================================================= -->
+
+    <div class="apology-text">
+
+        <p>
+            I know saying sorry doesn't erase what I did.
+            And I'm not going to make excuses for it.
+            I genuinely regret hurting you.
+        </p>
+
+        <p>
+            You didn't deserve to feel hurt because of me.
+            I wish I had handled things differently,
+            and I know that my actions matter more than
+            anything I can say right now.
+        </p>
+
+        <p>
+            I'm not asking you to forget what happened.
+            I just want you to know that I understand
+            that I was wrong, and I'm genuinely sorry.
+        </p>
+
+    </div>
+
+
+    <p class="important">
+        Because you're important to me.
+    </p>
+
+    <p class="important">
+        More important than my stupid mistake ever should have been.
+    </p>
+
+
+    <p class="pause">
+        And before you decide...
+    </p>
+
+
+    <!-- ================================================
+         LITTLE THINGS SECTION
+    ================================================= -->
+
+    <div class="little-things">
+
+        <h3>
+            There's something else.
+        </h3>
+
+        <p class="faint">
+            Press the little heart.
+        </p>
+
+
+        <div
+            class="little-heart"
+            id="littleHeart">
+
+            ❤️
+
+        </div>
+
+
+        <div
+            class="little-message"
+            id="littleMessage">
+
+            <!-- EDIT THIS -->
+
+            <p>
+                I don't love you only when everything is perfect.
+                I love you when we're laughing, when we're annoyed
+                with each other, when things get difficult,
+                and even when I'm the idiot who needs to apologize.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================
+         MEMORIES
+    ================================================= -->
+
+    <div class="memory">
+
+        <h3>
+            And I still think about...
+        </h3>
+
+
+        <!-- EDIT THESE MEMORIES -->
+
+        <div class="memory-item">
+            <p>
+                The little moments where we laughed over something
+                that probably wasn't even that funny.
+            </p>
+        </div>
+
+
+        <div class="memory-item">
+            <p>
+                The random conversations that somehow became
+                the best part of my day.
+            </p>
+        </div>
+
+
+        <div class="memory-item">
+            <p>
+                All those tiny moments that probably seemed
+                ordinary at the time, but mean a lot to me now.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- ================================================
+         FINAL APOLOGY QUESTION
+    ================================================= -->
+
+    <p class="pause">
+        So...
+    </p>
+
+    <p class="question">
+        Will you forgive me? ❤️
+    </p>
+
+
+    <div class="choice-buttons">
+
+        <button
+            class="yes"
+            id="yesButton">
+            YES ❤️
+        </button>
+
+        <button
+            class="no"
+            id="noButton">
+            NO
+        </button>
+
+    </div>
+
+
+    <!-- ================================================
+         ONE MORE THING
+    ================================================= -->
+
+    <div class="final-note">
+
+        <button
+            class="secondary"
+            id="oneMoreButton">
+
+            One more thing...
+
+        </button>
+
+
+        <div
+            class="hidden-note"
+            id="hiddenNote">
+
+            <!-- EDIT THIS -->
+
+            <p>
+                Whatever happens, I want you to know that
+                I'm grateful for you. Not because you're perfect,
+                but because you're you.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     3. YES SCREEN
+====================================================== -->
+
+<section id="success" class="screen hidden">
+
+<div class="card success">
+
+    <h2>
+        You have no idea how happy that made me.
+    </h2>
+
+    <p>
+        Thank you for forgiving me. ❤️
+    </p>
+
+
+    <!-- ================================================
+         EDIT YOUR FINAL MESSAGE HERE
+    ================================================= -->
+
+    <div class="love-note">
+
+        <p>
+            I don't expect everything to magically become
+            perfect just because I said sorry.
+
+            I just want you to know that I love you,
+            I appreciate having you in my life,
+            and I'm going to try to be better where it matters.
+        </p>
+
+    </div>
+
+
+    <p class="highlight">
+        I'll try to make sure my actions say sorry too.
+    </p>
+
+    <p class="faint">
+        I love you. ❤️
+    </p>
+
+</div>
+
+</section>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   NO BUTTON MESSAGES
+========================================================= */
+
+const noMessages = [
+    "NO",
+    "Wait...",
+    "Are you sure?",
+    "Please 🥺",
+    "Really?",
+    "Give me one chance ❤️",
+    "Okay okay...",
+    "Just think about it 🥺"
+];
+
+
+/* =========================================================
+   GET ELEMENTS
+========================================================= */
+
+const opening =
+    document.getElementById("opening");
+
+const apology =
+    document.getElementById("apology");
+
+const success =
+    document.getElementById("success");
+
+const explainButton =
+    document.getElementById("explainButton");
+
+const yesButton =
+    document.getElementById("yesButton");
+
+const noButton =
+    document.getElementById("noButton");
+
+const littleHeart =
+    document.getElementById("littleHeart");
+
+const littleMessage =
+    document.getElementById("littleMessage");
+
+const oneMoreButton =
+    document.getElementById("oneMoreButton");
+
+const hiddenNote =
+    document.getElementById("hiddenNote");
+
+
+/* =========================================================
+   OPEN APOLOGY
+========================================================= */
+
+explainButton.addEventListener("click", () => {
+
+    opening.classList.add("hidden");
+
+    apology.classList.remove("hidden");
+
+    showMemories();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+
+
+/* =========================================================
+   SHOW MEMORIES
+========================================================= */
+
+function showMemories() {
+
+    const memories =
+        document.querySelectorAll(".memory-item");
+
+    memories.forEach((memory, index) => {
+
+        setTimeout(() => {
+            memory.classList.add("show");
+        }, index * 450);
+
+    });
+}
+
+
+/* =========================================================
+   LITTLE HEART
+========================================================= */
+
+littleHeart.addEventListener("click", () => {
+
+    littleMessage.classList.toggle("show");
+
+});
+
+
+/* =========================================================
+   ONE MORE THING
+========================================================= */
+
+oneMoreButton.addEventListener("click", () => {
+
+    hiddenNote.classList.toggle("show");
+
+    if (hiddenNote.classList.contains("show")) {
+
+        oneMoreButton.textContent =
+            "I meant that. ❤️";
+
+    } else {
+
+        oneMoreButton.textContent =
+            "One more thing...";
+
+    }
+
+});
+
+
+/* =========================================================
+   YES BUTTON
+========================================================= */
+
+yesButton.addEventListener("click", () => {
+
+    apology.style.transition =
+        "opacity 0.6s ease, transform 0.6s ease";
+
+    apology.style.opacity = "0";
+
+    apology.style.transform =
+        "translateY(-15px)";
+
+    setTimeout(() => {
+
+        apology.classList.add("hidden");
+
+        success.classList.remove("hidden");
+
+        createHeartBurst();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 600);
+
+});
+
+
+/* =========================================================
+   NO BUTTON
+========================================================= */
+
+let noAttempts = 0;
+let noUnlocked = false;
+
+
+/*
+   Using pointerdown makes the interaction work
+   properly on phones as well as desktop.
+*/
+
+noButton.addEventListener("pointerdown", (event) => {
+
+    event.preventDefault();
+
+    if (noUnlocked) {
+        return;
+    }
+
+    noAttempts++;
+
+
+    /* Change button text */
+
+    if (noAttempts < noMessages.length) {
+
+        noButton.textContent =
+            noMessages[noAttempts];
+
+    }
+
+
+    /*
+       After enough attempts,
+       stop running away.
+    */
+
+    if (noAttempts >= 7) {
+
+        noUnlocked = true;
+
+        noButton.textContent =
+            "Okay... NO 💔";
+
+        noButton.classList.remove("moving");
+
+        noButton.style.position = "relative";
+        noButton.style.left = "";
+        noButton.style.top = "";
+
+        return;
+    }
+
+
+    moveNoButton();
+
+});
+
+
+/* =========================================================
+   MOVE NO BUTTON
+========================================================= */
+
+function moveNoButton() {
+
+    const rect =
+        noButton.getBoundingClientRect();
+
+    const buttonWidth =
+        rect.width;
+
+    const buttonHeight =
+        rect.height;
+
+
+    /*
+       Keep it away from screen edges.
+    */
+
+    const padding = 20;
+
+    const maxX =
+        window.innerWidth -
+        buttonWidth -
+        padding;
+
+    const maxY =
+        window.innerHeight -
+        buttonHeight -
+        padding;
+
+
+    /*
+       YES button location.
+       The NO button won't move over it.
+    */
+
+    const yesRect =
+        yesButton.getBoundingClientRect();
+
+
+    let finalX = padding;
+    let finalY = padding;
+
+    let foundPosition = false;
+
+
+    /*
+       Try multiple positions.
+    */
+
+    for (
+        let attempt = 0;
+        attempt < 40;
+        attempt++
+    ) {
+
+        const x =
+            Math.random() *
+            (maxX - padding) +
+            padding;
+
+        const y =
+            Math.random() *
+            (maxY - padding) +
+            padding;
+
+
+        /*
+           Add a generous safety area around YES.
+        */
+
+        const overlapsYes =
+
+            x <
+                yesRect.right + 35 &&
+
+            x + buttonWidth >
+                yesRect.left - 35 &&
+
+            y <
+                yesRect.bottom + 35 &&
+
+            y + buttonHeight >
+                yesRect.top - 35;
+
+
+        if (!overlapsYes) {
+
+            finalX = x;
+            finalY = y;
+
+            foundPosition = true;
+
+            break;
+        }
+    }
+
+
+    /*
+       Fallback.
+    */
+
+    if (!foundPosition) {
+
+        finalX = padding;
+        finalY = padding;
+
+    }
+
+
+    noButton.classList.add("moving");
+
+    noButton.style.left =
+        `${finalX}px`;
+
+    noButton.style.top =
+        `${finalY}px`;
+
+}
+
+
+/* =========================================================
+   KEEP NO BUTTON INSIDE SCREEN ON ROTATION / RESIZE
+========================================================= */
+
+window.addEventListener("resize", () => {
+
+    if (
+        noButton.classList.contains("moving") &&
+        !noUnlocked
+    ) {
+
+        moveNoButton();
+
+    }
+
+});
+
+
+/* =========================================================
+   SUBTLE FLOATING HEARTS
+========================================================= */
+
+function createHeart() {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className =
+        "heart-particle";
+
+    heart.textContent =
+        "♥";
+
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (10 + Math.random() * 8) + "px";
+
+    heart.style.animationDuration =
+        (6 + Math.random() * 3) + "s";
+
+
+    document.body.appendChild(heart);
+
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 9000);
+
+}
+
+
+/*
+   Very occasional hearts.
+   Nothing excessive.
+*/
+
+setInterval(() => {
+
+    if (Math.random() < 0.35) {
+
+        createHeart();
+
+    }
+
+}, 1800);
+
+
+/* =========================================================
+   HEARTS AFTER YES
+========================================================= */
+
+function createHeartBurst() {
+
+    for (let i = 0; i < 7; i++) {
+
+        setTimeout(() => {
+
+            createHeart();
+
+        }, i * 180);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+```
